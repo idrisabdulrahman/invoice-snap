@@ -1,0 +1,163 @@
+{
+    "name": "invoices",
+    "options": {
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "required": [
+                    "invoiceNumber",
+                    "clientName",
+                    "clientEmail",
+                    "amount",
+                    "status",
+                    "dueDate",
+                    "createdAt",
+                    "userId"
+                ],
+                "properties": {
+                    "invoiceNumber": {
+                        "bsonType": "string",
+                        "description": "Unique invoice identifier"
+                    },
+                    "clientName": {
+                        "bsonType": "string",
+                        "minLength": 1,
+                        "description": "Client or company name"
+                    },
+                    "clientEmail": {
+                        "bsonType": "string",
+                        "description": "Client email address"
+                    },
+                    "clientAddress": {
+                        "bsonType": "string",
+                        "description": "Client billing address"
+                    },
+                    "amount": {
+                        "bsonType": "number",
+                        "minimum": 0,
+                        "description": "Total invoice amount"
+                    },
+                    "currency": {
+                        "bsonType": "string",
+                        "enum": [
+                            "USD",
+                            "EUR",
+                            "GBP",
+                            "CNY"
+                        ],
+                        "description": "Invoice currency"
+                    },
+                    "status": {
+                        "bsonType": "string",
+                        "enum": [
+                            "draft",
+                            "sent",
+                            "paid",
+                            "overdue",
+                            "cancelled"
+                        ],
+                        "description": "Invoice status"
+                    },
+                    "dueDate": {
+                        "bsonType": "string",
+                        "title": "datetime",
+                        "description": "Payment due date"
+                    },
+                    "lineItems": {
+                        "bsonType": "array",
+                        "description": "Invoice line items",
+                        "items": {
+                            "bsonType": "object",
+                            "required": [
+                                "description",
+                                "quantity",
+                                "rate",
+                                "amount"
+                            ],
+                            "properties": {
+                                "description": {
+                                    "bsonType": "string",
+                                    "description": "Service or product description"
+                                },
+                                "quantity": {
+                                    "bsonType": "number",
+                                    "minimum": 0,
+                                    "description": "Quantity"
+                                },
+                                "rate": {
+                                    "bsonType": "number",
+                                    "minimum": 0,
+                                    "description": "Rate per unit"
+                                },
+                                "amount": {
+                                    "bsonType": "number",
+                                    "minimum": 0,
+                                    "description": "Line total amount"
+                                }
+                            }
+                        }
+                    },
+                    "notes": {
+                        "bsonType": "string",
+                        "description": "Additional notes"
+                    },
+                    "customization": {
+                        "bsonType": "object",
+                        "description": "Invoice customization settings",
+                        "properties": {
+                            "template": {
+                                "bsonType": "string",
+                                "enum": [
+                                    "minimal",
+                                    "professional",
+                                    "modern",
+                                    "classic"
+                                ],
+                                "description": "Invoice template style"
+                            },
+                            "logoUrl": {
+                                "bsonType": "string",
+                                "description": "Company logo URL"
+                            },
+                            "primaryColor": {
+                                "bsonType": "string",
+                                "description": "Primary color for branding"
+                            },
+                            "showTax": {
+                                "bsonType": "bool",
+                                "description": "Whether to show tax fields"
+                            }
+                        }
+                    },
+                    "userId": {
+                        "bsonType": "string",
+                        "description": "User ID who created the invoice"
+                    },
+                    "createdAt": {
+                        "bsonType": "string",
+                        "title": "datetime",
+                        "description": "Creation timestamp"
+                    },
+                    "updatedAt": {
+                        "bsonType": "string",
+                        "title": "datetime",
+                        "description": "Last update timestamp"
+                    },
+                    "sentAt": {
+                        "bsonType": "string",
+                        "title": "datetime",
+                        "description": "When invoice was sent"
+                    },
+                    "paidAt": {
+                        "bsonType": "string",
+                        "title": "datetime",
+                        "description": "When invoice was paid"
+                    }
+                },
+                "additionalProperties": true
+            }
+        },
+        "validationLevel": "moderate",
+        "validationAction": "warn"
+    }
+}

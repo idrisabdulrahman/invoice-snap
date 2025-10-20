@@ -1,0 +1,102 @@
+{
+    "name": "invoice_templates",
+    "options": {
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "required": [
+                    "name",
+                    "userId",
+                    "createdAt"
+                ],
+                "properties": {
+                    "name": {
+                        "bsonType": "string",
+                        "minLength": 1,
+                        "description": "Template name"
+                    },
+                    "description": {
+                        "bsonType": "string",
+                        "description": "Template description"
+                    },
+                    "settings": {
+                        "bsonType": "object",
+                        "description": "Template configuration",
+                        "properties": {
+                            "template": {
+                                "bsonType": "string",
+                                "enum": [
+                                    "minimal",
+                                    "professional",
+                                    "modern",
+                                    "classic"
+                                ],
+                                "description": "Base template style"
+                            },
+                            "logoUrl": {
+                                "bsonType": "string",
+                                "description": "Company logo URL"
+                            },
+                            "primaryColor": {
+                                "bsonType": "string",
+                                "description": "Primary brand color"
+                            },
+                            "secondaryColor": {
+                                "bsonType": "string",
+                                "description": "Secondary brand color"
+                            },
+                            "fontFamily": {
+                                "bsonType": "string",
+                                "enum": [
+                                    "Arial",
+                                    "Helvetica",
+                                    "Times",
+                                    "Georgia",
+                                    "Courier"
+                                ],
+                                "description": "Font family"
+                            },
+                            "showTax": {
+                                "bsonType": "bool",
+                                "description": "Show tax calculations"
+                            },
+                            "showDiscount": {
+                                "bsonType": "bool",
+                                "description": "Show discount fields"
+                            },
+                            "headerText": {
+                                "bsonType": "string",
+                                "description": "Custom header text"
+                            },
+                            "footerText": {
+                                "bsonType": "string",
+                                "description": "Custom footer text"
+                            }
+                        }
+                    },
+                    "isDefault": {
+                        "bsonType": "bool",
+                        "description": "Whether this is the user's default template"
+                    },
+                    "userId": {
+                        "bsonType": "string",
+                        "description": "User ID who owns the template"
+                    },
+                    "createdAt": {
+                        "bsonType": "string",
+                        "title": "datetime",
+                        "description": "Creation timestamp"
+                    },
+                    "updatedAt": {
+                        "bsonType": "string",
+                        "title": "datetime",
+                        "description": "Last update timestamp"
+                    }
+                },
+                "additionalProperties": true
+            }
+        },
+        "validationLevel": "moderate",
+        "validationAction": "warn"
+    }
+}
